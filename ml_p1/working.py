@@ -89,17 +89,13 @@ lr = LinearRegression()
 lr.fit(X_train, y_train)
 
 print("lr.coef_: {}".format(lr.coef_))
-print("lr.intercept_: {}".format(lr.intercept_)
+print("lr.intercept_: {}".format(lr.intercept_))
 # Estimate the accuracy of the classifier on future data, using the test data
 # score = 1-relative score
 # R^2(y, hat{y}) = 1 - {sum_{i=1}^{n} (y_i - hat{y}_i)^2}/{sum_{i=1}^{n} (y_i - bar{y})^2}
 #########################################################################################
 print("Training set score: {:.2f}".format(lr.score(X_train, y_train)))
-print("Test set score: {:.2f}".format(lr.score(X_test, y_test))
-
-# Malignant = 1, Benign = 0
-print("Diagnosis: {}".format(prediction[0]))
-
+print("Test set score: {:.2f}".format(lr.score(X_test, y_test)))
 
 ##########################################################################################
 import pandas as pd
