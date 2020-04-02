@@ -39,7 +39,7 @@ if seeData:
 
 # Create classifier object: kNN
 from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors = 3, weights = 'uniform')
+knn = KNeighborsClassifier(n_neighbors = 15, weights = 'uniform')
 knn.fit(X_train, y_train)
 print("kNN Training set score: {:.2f}%".format(100*knn.score(X_train, y_train)))
 print("kNN Test set score: {:.2f}%".format(100*knn.score(X_test, y_test)))
@@ -86,7 +86,7 @@ print("SVM Gaussian Test set score: {:.2f}%".format(100*svc.score(X_test, y_test
 
 # kNN
 from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors = 3, weights = 'uniform')
+knn = KNeighborsClassifier(n_neighbors = 15, weights = 'uniform')
 knn.fit(X_train, y_train)
 print("kNN Training set score: {:.2f}%".format(100*knn.score(X_train, y_train)))
 print("kNN Test set score: {:.2f}%".format(100*knn.score(X_test, y_test)))

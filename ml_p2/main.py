@@ -33,7 +33,7 @@ print("\t   Benign cases: {}".format(len(y) - malig))
 print("\t Training split: 75%")
 print("\t  Testing split: 25%")
 
-visualize = True
+visualize = False
 if visualize:
    # Generate plots of the data in reduced dimensions
    fig = plt.figure()
@@ -53,7 +53,8 @@ if visualize:
    plt.title("Figure 2")
    plt.show()
 
-print("\n\nRunning logistic regression:\n")
+input("\nPress enter to run logistic regression:")
+print("\nRunning logistic regression:\n")
 
 from sklearn.linear_model import LogisticRegression
 lr = LogisticRegression(random_state=rd.randrange(0, 0x7fffffff))
@@ -70,11 +71,55 @@ print("lr.intercept_: {}".format(lr.intercept_))
 print("Training set score: {:.2f}".format(lr.score(X_train, y_train)))
 print("Test set score: {:.2f}".format(lr.score(X_test, y_test)))
 
-
 sm.plot_confusion_matrix(lr, X_test, y_test, display_labels=['Benign', 'Malignant'], 
                          cmap=plt.cm.Blues)
 plt.title("Logistic Regression Test Data Confusion Matrix")
 plt.show()
 
-input("\n\nLogistic regression is finished.\nPress enter to continue.")
+input("\nLogistic regression is finished.\nPress enter to continue.")
 
+###########################################################################################
+
+print("\nRunning Support Vector Machine:\n")
+
+from sklearn.svm import LinearSVC
+# partition the data into two classes
+y_train_1 = y_train == 1
+y_test_1 = y_test == 1
+y_train = 2 - y_train_1 
+y_test = 2 - y_test_1
+
+# Create classifier object: Create a linear SVM classifier
+# C: Regularization parameter. Default C=1
+lsvc = LinearSVC(C=100, random_state=rd.randrange(0, 0x7fffffff), tol=1e-4)
+lsvc.fit(X_train, y_train)
+
+print("Linear SVM Training set score: {:.2f}%".format(100*lsvc.score(X_train, y_train)))
+print("Linear SVM Test set score: {:.2f}%".format(100*lsvc.score(X_test, y_test)))
+
+lsvc.predict(X_test)
+print(lsvc.coef_)
+print(lsvc.intercept_)
+
+sm.plot_confusion_matrix(lsvc, X_test, y_test, display_labels=['Benign', 'Malignant'], 
+                         cmap=plt.cm.Blues)
+plt.title("Support Vector Machine Test Data Confusion Matrix")
+plt.show()
+
+input("\nSupport Vector Machine is finished.\nPress enter to continue.")
+
+###########################################################################################
+
+print("\nRunning K Nearest Neighbors with K = 15:\n")
+
+# Create classifier object: kNN
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors = 15, weights = 'uniform')
+knn.fit(X_train, y_train)
+print("kNN Training set score: {:.2f}%".format(100*knn.score(X_train, y_train)))
+print("kNN Test set score: {:.2f}%".format(100*knn.score(X_test, y_test)))
+
+sm.plot_confusion_matrix(knn, X_test, y_test, display_labels=['Benign', 'Malignant'], 
+                         cmap=plt.cm.Blues)
+plt.title("KNN Test Data Confusion Matrix")
+plt.show()
