@@ -33,7 +33,7 @@ print("\t   Benign cases: {}".format(len(y) - malig))
 print("\t Training split: 75%")
 print("\t  Testing split: 25%")
 
-visualize = False
+visualize = True
 if visualize:
    # Generate plots of the data in reduced dimensions
    fig = plt.figure()
@@ -57,7 +57,7 @@ input("\nPress enter to run logistic regression:")
 print("\nRunning logistic regression:\n")
 
 from sklearn.linear_model import LogisticRegression
-lr = LogisticRegression(random_state=rd.randrange(0, 0x7fffffff))
+lr = LogisticRegression(random_state=rd.randrange(0, 0x7fffffff), max_iter=10000)
 lr.fit(X_train, y_train)
 
 #########################################
@@ -91,7 +91,7 @@ y_test = 2 - y_test_1
 
 # Create classifier object: Create a linear SVM classifier
 # C: Regularization parameter. Default C=1
-lsvc = LinearSVC(C=100, random_state=rd.randrange(0, 0x7fffffff), tol=1e-4)
+lsvc = LinearSVC(C=100, random_state=rd.randrange(0, 0x7fffffff), tol=1e-4, max_iter=100000)
 lsvc.fit(X_train, y_train)
 
 print("Linear SVM Training set score: {:.2f}%".format(100*lsvc.score(X_train, y_train)))
