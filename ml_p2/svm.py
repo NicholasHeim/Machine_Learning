@@ -1,27 +1,24 @@
-# reading and writing data
 import pandas as pd
-fruits = pd.read_csv('fruit_data_with_colors.txt', sep='\t')
-fruits.head()
+import random as rd
 
-# create a mapping from fruit label value to fruit name to make results easier to interpret
-lookup_fruit_name = dict(zip(fruits.fruit_label.unique(), fruits.fruit_name.unique()))
-print(lookup_fruit_name)
+data = pd.read_csv('wdbc.data')
 
-X = fruits[['height', 'width', 'mass', 'color_score']]
-y = fruits['fruit_label']
+X = data[['a','b','c','d','e','f','g','h','i','j','0','1','2','3','4','5',
+          '6','7','8','9','10','11','12','13','14','15','16','17','18','19']]
+y = data['Diagnosis']
 
 from sklearn.model_selection import train_test_split
-#random_state: set seed for random# generator
 #test_size: default 25% testing, 75% training
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+         X, y, test_size=.25, random_state=rd.randrange(0, 0x7fffffff))
 
 # partition the data into two classes
-y_train_1 = y_train == 1  # mandarin in True class, others in False class
-y_test_1 = y_test == 1   # mandarin in True class, others in False class
-y_train = 2 - y_train_1  # mandarin = 1; others =2
+y_train_1 = y_train == 1
+y_test_1 = y_test == 1
+y_train = 2 - y_train_1 
 y_test = 2 - y_test_1
 
-seeData = True
+seeData = False
 if seeData:
     # plotting a scatter matrix
     from matplotlib import cm
@@ -34,10 +31,10 @@ if seeData:
     from mpl_toolkits.mplot3d import axes3d   # must keep
     fig = plt.figure()
     ax = fig.add_subplot(111, projection = '3d')
-    ax.scatter(X_train['width'], X_train['height'], X_train['color_score'], c = y_train, marker = 'o', s=100)
-    ax.set_xlabel('width')
-    ax.set_ylabel('height')
-    ax.set_zlabel('color_score')
+    ax.scatter(X_train['a'], X_train['b'], X_train['c'], c = y_train, marker = 'o', s=100)
+    ax.set_xlabel('Radius')
+    ax.set_ylabel('Texture')
+    ax.set_zlabel('Perimiter')
     plt.show()
 
 # Create classifier object: kNN
