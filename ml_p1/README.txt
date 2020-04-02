@@ -1,0 +1,2 @@
+Project 1 README
+The entire file should not be run at once. Sections of the code should be coppied and pasted into a python 3.7 interpreter. The code from line 1 to line 72 can be run at once. This code can also be followed by the ridge and lasso regression sections clearly marked at the bottom of the program: after line 177. Line 76 through line 98 is the standard least squares regression(LSR) model. A more indepth approach to the analysis of the LSR follows from line 107 to 175. 
