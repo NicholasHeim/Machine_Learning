@@ -52,6 +52,7 @@
 # Breast Cancer Diagnosis
 ########################################################################################
 import pandas as pd
+import random as rd
 
 data = pd.read_csv('wdbc.data')
 
@@ -62,10 +63,11 @@ y = data['Diagnosis']
 from sklearn.model_selection import train_test_split
 #random_state: set seed for random# generator
 #test_size: default 25% testing, 75% training
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.25, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+   X, y, test_size=.25, random_state=rd.randrange(0, 0x7fffffff))
 
 from sklearn.linear_model import LogisticRegression
-lr = LogisticRegression(random_state=40)
+lr = LogisticRegression(random_state=rd.randrange(0, 0x7fffffff))
 lr.fit(X_train, y_train)
 
 #########################################
