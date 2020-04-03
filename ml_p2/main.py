@@ -16,9 +16,12 @@ X = data[['a','b','c','d','e','f','g','h','i','j','0','1','2','3','4','5',
           '6','7','8','9','10','11','12','13','14','15','16','17','18','19']]
 y = data['Diagnosis']
 
+# random seed for each test. Constant here so that each test is running on the same data.
+rando = rd.randrange(0, 0x7fffffff)
+
 #test_size: default 25% testing, 75% training
 X_train, X_test, y_train, y_test = train_test_split(
-   X, y, test_size=.25, random_state=rd.randrange(0, 0x7fffffff))
+   X, y, test_size=.25, random_state=rando)
 
 # Small function to count the number malignant cases in the dataset
 malig = 0
@@ -57,7 +60,7 @@ input("\nPress enter to run logistic regression:")
 print("\nRunning logistic regression:\n")
 
 from sklearn.linear_model import LogisticRegression
-lr = LogisticRegression(random_state=rd.randrange(0, 0x7fffffff), max_iter=10000)
+lr = LogisticRegression(random_state=rando, max_iter=10000)
 lr.fit(X_train, y_train)
 
 #########################################
@@ -91,7 +94,7 @@ y_test = 2 - y_test_1
 
 # Create classifier object: Create a linear SVM classifier
 # C: Regularization parameter. Default C=1
-lsvc = LinearSVC(C=100, random_state=rd.randrange(0, 0x7fffffff), tol=1e-4, max_iter=100000)
+lsvc = LinearSVC(C=100, random_state=rando, tol=1e-4, max_iter=100000)
 lsvc.fit(X_train, y_train)
 
 print("Linear SVM Training set score: {:.2f}%".format(100*lsvc.score(X_train, y_train)))
